@@ -26,6 +26,7 @@ export function buildLevel(game, level) {
     });
 
     return tiles
+    
 }
 
 export const level1 = [
