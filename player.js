@@ -1,5 +1,8 @@
+
+
+
 export default class Player{
-    constructor(game){
+    constructor(game, buildLevel){
         this.width = 50;
         this.height = 50;
 
@@ -15,14 +18,19 @@ export default class Player{
             y: 0,
         }
         
-        this.game = game;
-
+        this.build = buildLevel
+        this.game = game
+        this.color = "green"
 
         this.position = {
             x: game.gameWidth / 2 - this.width / 2,
 
             y: game.gameHeight / 2 - this.height / 2
+
+
         };
+
+
     }
 
     moveleft(){
@@ -31,7 +39,7 @@ export default class Player{
     moveright(){
         this.speed.x = this.maxspeed.x;
     }
-    stop(){
+    stopx(){
         this.speed.x = 0;
     }
     moveup(){
@@ -43,11 +51,14 @@ export default class Player{
     stopy(){
         this.speed.y = 0;
     }
+    collide(){
+        this.position.x = 0
+    }
    
  
 
     draw(ctx){
-        ctx.fillStyle = "green";
+        ctx.fillStyle = this.color;
         ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
 
     }
@@ -67,7 +78,9 @@ export default class Player{
 
         if(this.position.y < 0) this.position.y = 0;
         if(this.position.y + this.height > this.gameHeight)
-            this.position.y = this.gameHeight -this.height;
+            this.position.y = this.gameHeight - this.height;
+
+        
         
     }
 }

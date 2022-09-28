@@ -13,6 +13,7 @@ export function buildLevel(game, level) {
                     y: 0 + 90 * rowIndex
                 }
                 tiles.push(new Rock(game, position));
+
             }
             if(tile === 0){
                 let position = {
