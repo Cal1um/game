@@ -1,5 +1,3 @@
-
-
 export default class Rock {
     constructor(game, position) {
         this.gameWidth = game.gameWidth;

@@ -1,7 +1,16 @@
 export default class InputHandler {
-    constructor(player) {
+    constructor(player, projectile) {
         document.addEventListener('keydown', event => {
             switch (event.keyCode){
+
+
+                case 38:
+                   projectile.shootup();
+                   break;
+
+                case 40:
+                    projectile.shootdown();
+                    break;
 
                 
                 case 65:
