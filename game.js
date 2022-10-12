@@ -1,16 +1,22 @@
 import Player from "/player.js";
 import InputHandler from "/input.js";
 import Rock from "/Rock.js"
+import ProjectileDely from "/projectiledely.js";
 
 
-import { buildLevel, level1 } from "/levels.js"
-import Projectile from "/projectile.js";
+import { buildLevel, level1, level2 } from "/levels.js"
+import ProjectileUp from "/projectileup.js";
+import ProjectileDown from "/projectiledown.js";
+import ProjectileLeft from "/projectileleft.js";
+import ProjectileRight from "/projectileright.js";
 
 
 export default class Game{
     constructor(gameWidth, gameHeight) {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
+
+        this.currentLevel = 0;
         
     }
 
@@ -18,16 +24,27 @@ export default class Game{
 
         this.player = new Player(this);
 
-        this.projectile = new Projectile(this)
+        this.projectileup = new ProjectileUp(this)
+        this.projectiledown = new ProjectileDown(this)
+        this.projectileleft = new ProjectileLeft(this)
+        this.projectileright = new ProjectileRight(this)
 
-        let tile = buildLevel(this, level1);
+        this.projectiledely = new ProjectileDely(this)
 
-        new InputHandler(this.player, this.projectile);
+        this.levels = [level1, level2]
+
+        let tile = buildLevel(this, this.levels[this.currentLevel]);
+
+        new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
 
 
-        this.gameObjects = [...tile, this.projectile, this.player,];
+        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely];
+
+        this.currentLevel = 1 
 
     }
+
+    
 
     update(deltaTime){
         this.gameObjects.forEach((Object) => Object.update(deltaTime))

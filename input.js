@@ -1,15 +1,21 @@
 export default class InputHandler {
-    constructor(player, projectile) {
+    constructor(player, projectileup, projectiledown, projectileleft, projectileright) {
         document.addEventListener('keydown', event => {
             switch (event.keyCode){
 
 
                 case 38:
-                   projectile.shootup();
+                   projectileup.shootup();
                    break;
-
                 case 40:
-                    projectile.shootdown();
+                    projectiledown.shootdown();
+                    break;
+
+                case 37:
+                    projectileleft.shootleft();
+                    break;
+                case 39:
+                    projectileright.shootright();
                     break;
 
                 
@@ -35,6 +41,23 @@ export default class InputHandler {
         });
         document.addEventListener('keyup', event => {
             switch (event.keyCode){
+
+                case 38:
+                   projectileup.shootstop();
+                   break;
+                case 40:
+                    projectiledown.shootstop();
+                    break;
+                case 37:
+                    projectileleft.shootstop();
+                    break;
+                case 39:
+                    projectileright.shootstop();
+                    break;
+    
+
+
+
                 case 65:
                     if(player.speed.x < 0)player.stopx();
                     break;
