@@ -3,7 +3,7 @@ export default class ProjectileDely {
         this.dely = 0
 
         this.time = 0
-        this.delybetweenshot = 41
+        this.delybetweenshot = 36
 
     }
     update(){
