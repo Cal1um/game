@@ -1,5 +1,5 @@
 export default class InputHandler {
-    constructor(player, projectileup, projectiledown, projectileleft, projectileright) {
+    constructor(player, projectileup, projectiledown, projectileleft, projectileright, collision) {
         document.addEventListener('keydown', event => {
             switch (event.keyCode){
 
@@ -32,6 +32,10 @@ export default class InputHandler {
                     break;
                 case 83:
                     player.movedown();
+                    break;
+                
+                case 77:
+                    collision.check();
                     break;
                 
                 

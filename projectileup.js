@@ -11,6 +11,13 @@ export default class ProjectileUp {
 
         this.size = 10;
         this.speed = -10
+        this.maxspeed = {
+            x: 10,
+
+            y: 10
+        }
+        this.width = 10
+        this.height = 10
     }
 
     projectiles = [];

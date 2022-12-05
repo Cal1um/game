@@ -2,6 +2,7 @@ import Player from "/player.js";
 import InputHandler from "/input.js";
 import Rock from "/Rock.js"
 import ProjectileDely from "/projectiledely.js";
+import Enemy from "/enemy.js";
 
 
 import { buildLevel, level0, level1, level2, level3, level4, level5, level6 } from "/levels.js"
@@ -9,6 +10,8 @@ import ProjectileUp from "/projectileup.js";
 import ProjectileDown from "/projectiledown.js";
 import ProjectileLeft from "/projectileleft.js";
 import ProjectileRight from "/projectileright.js";
+
+import Collision from "/collision.js";
 
 
 export default class Game{
@@ -26,7 +29,8 @@ export default class Game{
     }
     
     newlevel(){
-
+        
+        
         this.random = Math.floor(Math.random() * 6) + 1;
         if(this.firstloop === 0){
             
@@ -83,7 +87,6 @@ export default class Game{
             this.currentLevel = this.room
 
 
-            console.log(this.player.newlevel)
             this.player.position.y = 0
             this.player.newlevel = 0
         }
@@ -91,23 +94,29 @@ export default class Game{
         this.levels = [level0, level1, level2, level3, level4, level5, level6]
 
         let tile = buildLevel(this, this.levels[this.currentLevel]);
+        this.collision = new Collision(this, tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
 
         new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
 
+        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision];
         
-        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely];
-
+        
     }
 
     start(){
         this.player = new Player(this, this.currentLevel);
+        this.enemy = new Enemy(this);
 
         this.projectileup = new ProjectileUp(this);
         this.projectiledown = new ProjectileDown(this);
         this.projectileleft = new ProjectileLeft(this);
         this.projectileright = new ProjectileRight(this);
+        this.rock = new Rock(this);
 
         this.projectiledely = new ProjectileDely(this);
+
+        
+        
 
         if(this.firstloop === 0){
             this.newlevel()            
@@ -118,37 +127,13 @@ export default class Game{
 
         let tile = buildLevel(this, this.levels[this.currentLevel]);
 
-        new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
-
+        new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.collision);
         
-        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely];
-
-
-
+        this.tile = tile
         
+        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision];
         
     }
-
-    /*layergen(){
-        this.random = Math.floor(Math.random() * 6) + 1;
-
-
-        var layer = [];
-        for (var i = 0; i < 11; i++){
-            layer[i] = [];
-            for (var j = 0; j < 11; j++){
-                layer[i][j] = Math.floor(Math.random() * 6) + 1;
-                
-            }
-        }
-        
-        layer[5][5] = 0
-        
-
-        this.currentLevel = layer[this.RightLeft][this.UpDown]
-
-        this.newlevel(layer);
-    }*/
 
     
 

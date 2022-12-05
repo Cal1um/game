@@ -5,6 +5,7 @@ export default class Player{
     constructor(game, buildLevel){
         this.width = 50;
         this.height = 50;
+        this.size = 50
 
         this.gameHeight = game.gameHeight;
         this.gameWidth = game.gameWidth;
@@ -31,10 +32,9 @@ export default class Player{
 
 
         };
-
     }
 
-    moveleft(){
+    moveleft(stopleft){
         this.speed.x = -this.maxspeed.x;
     }
     moveright(){
@@ -52,9 +52,12 @@ export default class Player{
     stopy(){
         this.speed.y = 0;
     }
-    collide(){
-        this.position.x = 0
-    }
+
+
+
+
+
+
    
  
 
@@ -67,11 +70,8 @@ export default class Player{
         if(!deltaTime) return;
         
         
-       
         this.position.x += this.speed.x;
         this.position.y += this.speed.y;
-
-
 
         if(this.position.x < 0){
             this.position.x = 0
