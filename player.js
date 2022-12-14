@@ -5,7 +5,9 @@ export default class Player{
     constructor(game, buildLevel){
         this.width = 50;
         this.height = 50;
-        this.size = 50
+        this.size = 50;
+
+        this.health  = 50
 
         this.gameHeight = game.gameHeight;
         this.gameWidth = game.gameWidth;
@@ -53,13 +55,21 @@ export default class Player{
         this.speed.y = 0;
     }
 
+    colliderLeft(Collider){
+        this.position.x = Collider.position.x - this.width
+    }
+    colliderRight(Collider){
+        this.position.x = Collider.position.x + Collider.size
+    }
+    colliderUp(Collider){
+        this.position.y = Collider.position.y + Collider.size
+    }
+    colliderDown(Collider){
+        this.position.y = Collider.position.y - this.width
+    }
 
 
 
-
-
-   
- 
 
     draw(ctx){
         ctx.fillStyle = this.color;

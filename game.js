@@ -94,7 +94,8 @@ export default class Game{
         this.levels = [level0, level1, level2, level3, level4, level5, level6]
 
         let tile = buildLevel(this, this.levels[this.currentLevel]);
-        this.collision = new Collision(this, tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
+        this.tile = tile
+        this.collision = new Collision(this, this.tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player);
 
         new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
 
