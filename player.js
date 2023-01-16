@@ -7,7 +7,7 @@ export default class Player{
         this.height = 50;
         this.size = 50;
 
-        this.health  = 50
+        this.health  = 10
 
         this.gameHeight = game.gameHeight;
         this.gameWidth = game.gameWidth;
@@ -78,6 +78,13 @@ export default class Player{
     }
     update(deltaTime){
         if(!deltaTime) return;
+
+        if(this.health < 1){
+            this.game.RightLeft = 5
+            this.game.UpDown = 5
+            this.game.firstloop = 0
+            this.game.start()
+        }
         
         
         this.position.x += this.speed.x;

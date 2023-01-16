@@ -8,7 +8,7 @@ export default class ProjectileLeft {
 
             y: this.game.player.position.y + 20
         }
-
+        this.damage = 1
         this.size = 10;
         this.speed = -10
         this.width = 10
@@ -33,6 +33,20 @@ export default class ProjectileLeft {
         this.shoot = 0
     }
 
+      colliderLeft(Collider){
+        this.position.x = Collider.position.x - this.width
+    }
+    colliderRight(Collider){
+        this.position.x = Collider.position.x + Collider.size
+    }
+    colliderUp(Collider){
+        this.position.y = Collider.position.y + Collider.size
+    }
+    colliderDown(Collider){
+        this.position.y = Collider.position.y - this.width
+    }
+
+
     update(deltaTime){
         if(this.shoot === 1){
             if(this.game.projectiledely.dely >= 1){
@@ -41,6 +55,8 @@ export default class ProjectileLeft {
             }
         }
     }
+
+    
     
     draw(ctx){
         this.projectiles.forEach((ProjectileLeft) => ProjectileLeft.draw(ctx));

@@ -1,7 +1,6 @@
 export default class Collision {
     constructor(game, tile, projectileup, projectiledown, projectileleft, projectileright, player){
         this.game = game;
-        this.colliding = 0;
         this.tile = tile;
         this.projectiledown = projectiledown;
         this.projectileleft = projectileleft;
@@ -18,35 +17,35 @@ export default class Collision {
             this.collider.forEach((Collider) => {
                 //Top Right Left
                 if(Collider.position.x <= Object.position.x + Object.width - Object.maxspeed.x && Object.position.x + Object.width - Object.maxspeed.x <= Collider.position.x && Collider.position.y < Object.position.y && Object.position.y < Collider.position.y + Collider.size){
-                    Object.position.x = Collider.position.x - Object.width
+                    Object.colliderLeft(Collider)
                 }
                 //Top Right up
                 if(Collider.position.y + Collider.size <= Object.position.y + Object.maxspeed.y && Object.position.y + Object.maxspeed.y <= Collider.position.y + Collider.size && Collider.position.x < Object.position.x + Object.maxspeed.y && Object.position.x + Object.maxspeed.y < Collider.position.x + Collider.size){
-                    Object.position.y = Collider.position.y + Collider.size
+                    Object.colliderUp(Collider)
                 }                
                 //Bottum Right Left
                 if(Collider.position.x <= Object.position.x + Object.width - Object.maxspeed.x && Object.position.x + Object.width - Object.maxspeed.x <= Collider.position.x && Collider.position.y < Object.position.y + Object.height && Object.position.y + Object.height < Collider.position.y + Collider.size){
-                    Object.position.x = Collider.position.x - Object.width
+                    Object.colliderLeft(Collider)
                 }
                 //Bottum Right down
                 if(Collider.position.y <= Object.position.y + Object.width - Object.maxspeed.y && Object.position.y + Object.width - Object.maxspeed.y <= Collider.position.y && Collider.position.x < Object.position.x + Object.width && Object.position.x + Object.width < Collider.position.x + Collider.size){
-                    Object.position.y = Collider.position.y - Object.width
+                    Object.colliderDown(Collider)
                 }
                 //Top Left Right 
                 if(Collider.position.x + Collider.size <= Object.position.x + Object.maxspeed.x && Object.position.x + Object.maxspeed.x <= Collider.position.x + Collider.size && Collider.position.y < Object.position.y + Object.maxspeed.x && Object.position.y + Object.maxspeed.x < Collider.position.y + Collider.size){
-                    Object.position.x = Collider.position.x + Collider.size
+                    Object.colliderRight(Collider)
                 }
                 //Top Left up
                 if(Collider.position.y + Collider.size <= Object.position.y + Object.maxspeed.y && Object.position.y + Object.maxspeed.y <= Collider.position.y + Collider.size && Collider.position.x < Object.position.x + Object.width && Object.position.x + Object.width < Collider.position.x + Collider.size){
-                    Object.position.y = Collider.position.y + Collider.size
+                    Object.colliderUp(Collider)
                 }
                 //Bottum Left Right
                 if(Collider.position.x + Collider.size <= Object.position.x + Object.maxspeed.x && Object.position.x + Object.maxspeed.x <= Collider.position.x + Collider.size && Collider.position.y < Object.position.y + Object.height - Object.maxspeed.x && Object.position.y + Object.height - Object.maxspeed.x < Collider.position.y + Collider.size){
-                    Object.position.x = Collider.position.x + Collider.size
+                    Object.colliderRight(Collider)
                 }
                 //Bottum Left down
                 if(Collider.position.y <= Object.position.y + Object.width - Object.maxspeed.y && Object.position.y + Object.width - Object.maxspeed.y <= Collider.position.y && Collider.position.x < Object.position.x && Object.position.x < Collider.position.x + Collider.size){
-                    Object.position.y = Collider.position.y - Object.width
+                    Object.colliderDown(Collider)
                 }
             }) 
         });

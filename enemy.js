@@ -5,6 +5,8 @@ export default class Enemy {
 
         this.game = game
 
+        this.health = 2
+
         this.id = 300
         this.damage = 1
 
@@ -18,23 +20,51 @@ export default class Enemy {
 
             y: 2.5
         };
+        this.dely = 0
+
+        this.time = 0
+        this.delybetweenattack = 15
     }
 
     colliderLeft(Collider){
         this.position.x = Collider.position.x - this.width
-        console.log("working")
+        if(Collider == this.game.player){
+            if(this.dely >= 1){
+                this.dely = 0
+                this.game.player.health -= 1
+                console.log(this.game.player.health)                
+            }
+        }
     }
     colliderRight(Collider){
         this.position.x = Collider.position.x + Collider.size
-        console.log("working")
+        if(Collider == this.game.player){
+            if(this.dely >= 1){
+                this.dely = 0
+                this.game.player.health -= 1
+                console.log(this.game.player.health)                
+            }
+        }
     }
     colliderUp(Collider){
         this.position.y = Collider.position.y + Collider.size
-        console.log("working")
+        if(Collider == this.game.player){
+            if(this.dely >= 1){
+                this.dely = 0
+                this.game.player.health -= 1
+                console.log(this.game.player.health)                
+            }
+        }
     }
     colliderDown(Collider){
         this.position.y = Collider.position.y - this.width
-        console.log("working")
+        if(Collider == this.game.player){
+            if(this.dely >= 1){
+                this.dely = 0
+                this.game.player.health -= 1
+                console.log(this.game.player.health)                
+            }
+        }
     }
 
     update(deltaTime){
@@ -50,6 +80,15 @@ export default class Enemy {
         if(this.position.y > this.game.player.position.y + 10){
             this.position.y -= this.speed
         }
+
+        this.time++
+        if(this.time >= this.delybetweenattack){
+            if(this.dely < 1){
+                this.dely++
+                this.time = 0
+            }
+        }
+        console.log(this.health)
     }
 
     draw(ctx){

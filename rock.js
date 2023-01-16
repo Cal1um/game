@@ -17,6 +17,20 @@ export default class Rock {
         this.size = 90;
     }
 
+    colliderLeft(Collider){
+        this.position.x = Collider.position.x - this.width
+    }
+    colliderRight(Collider){
+        this.position.x = Collider.position.x + Collider.size
+    }
+    colliderUp(Collider){
+        this.position.y = Collider.position.y + Collider.size
+    }
+    colliderDown(Collider){
+        this.position.y = Collider.position.y - this.width
+    }
+
+
     update(deltaTime){
     }
 

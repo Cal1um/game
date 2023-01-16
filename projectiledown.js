@@ -8,7 +8,7 @@ export default class ProjectileDown {
 
             y: this.game.player.position.y + 20
         }
-
+        this.damage = 1
         this.size = 10;
         this.speed = 10
         this.width = 10
@@ -18,6 +18,7 @@ export default class ProjectileDown {
 
             y: 10
         }
+        this.delete = false;
     }
 
     projectiles = [];
@@ -33,6 +34,24 @@ export default class ProjectileDown {
         this.shoot = 0
     }
 
+    colliderLeft(Collider){
+        this.position.x = Collider.position.x - this.width
+        this.delete = true;
+    }
+    colliderRight(Collider){
+        this.position.x = Collider.position.x + Collider.size
+        this.delete = true;
+    }
+    colliderUp(Collider){
+        this.position.y = Collider.position.y + Collider.size
+        this.delete = true;
+    }
+    colliderDown(Collider){
+        this.position.y = Collider.position.y - this.width
+        this.delete = true;
+    }
+
+
     update(deltaTime){
         if(this.shoot === 1){
             if(this.game.projectiledely.dely >= 1){
@@ -40,6 +59,7 @@ export default class ProjectileDown {
                 this.game.projectiledely.dely = 0
             }
         }
+
     }
     
     draw(ctx){
