@@ -10,7 +10,11 @@ export default class ProjectileUp {
         }
         this.damage = 1
         this.size = 10;
-        this.speed = -10
+        this.speed = {
+            x: -10,
+
+            y: -10
+        };
         this.maxspeed = {
             x: 10,
 
@@ -18,6 +22,8 @@ export default class ProjectileUp {
         }
         this.width = 10
         this.height = 10
+        this.delete = false;
+        this.id = 200
     }
 
     projectiles = [];
@@ -33,17 +39,41 @@ export default class ProjectileUp {
         this.shoot = 0
     }
 
-      colliderLeft(Collider){
+    colliderLeft(Collider){
         this.position.x = Collider.position.x - this.width
+        if(Collider != this.game.player){
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
     colliderRight(Collider){
         this.position.x = Collider.position.x + Collider.size
+        if(Collider != this.game.player){
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
     colliderUp(Collider){
         this.position.y = Collider.position.y + Collider.size
+        if(Collider != this.game.player){
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
     colliderDown(Collider){
         this.position.y = Collider.position.y - this.width
+        if(Collider != this.game.player){
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
 
 
@@ -54,13 +84,15 @@ export default class ProjectileUp {
                 this.game.projectiledely.dely = 0
             }
         }
+
+        this.projectiles = this.projectiles.filter(object => object.delete === false);
     }
 
 
 
     draw(ctx){
         this.projectiles.forEach((ProjectileUp) => ProjectileUp.draw(ctx));
-        this.position.y += this.speed
+        this.position.y += this.speed.x
             ctx.fillStyle = "green"
             ctx.fillRect(
                 this.position.x, 

@@ -111,8 +111,6 @@ export default class Player{
             this.newlevel = 4
             this.game.newlevel()
         }
-
-        
         
     }
 }

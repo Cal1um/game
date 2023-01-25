@@ -140,8 +140,6 @@ export default class Game{
 
     update(deltaTime){
         this.gameObjects.forEach((Object) => Object.update(deltaTime))
-
-        this.gameObjects = this.gameObjects.filter(object => !object.delete);
     }
     draw(ctx){
         this.gameObjects.forEach((Object) => Object.draw(ctx))

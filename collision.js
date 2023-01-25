@@ -11,7 +11,7 @@ export default class Collision {
     update(deltaTime){
         
         this.object = [...this.game.tile, this.player, ...this.projectiledown.projectiles, ...this.projectileup.projectiles, ...this.projectileleft.projectiles, ...this.projectileright.projectiles]
-        this.collider = [...this.game.tile, this.player]
+        this.collider = this.object
 
         this.object.forEach((Object) => {
             this.collider.forEach((Collider) => {

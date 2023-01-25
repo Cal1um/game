@@ -14,7 +14,11 @@ export default class Enemy {
         this.width = 30;
         this.height = 30;
         this.size = 30;
-        this.speed = 2.5;
+        this.speed = {
+            x: 2.5,
+
+            y: 2.5
+        };
         this.maxspeed = {
             x: 2.5,
 
@@ -24,6 +28,7 @@ export default class Enemy {
 
         this.time = 0
         this.delybetweenattack = 15
+        this.color = "rgba(255, 0, 0, 1)"
     }
 
     colliderLeft(Collider){
@@ -31,8 +36,7 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1
-                console.log(this.game.player.health)                
+                this.game.player.health -= 1              
             }
         }
     }
@@ -41,8 +45,7 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1
-                console.log(this.game.player.health)                
+                this.game.player.health -= 1                
             }
         }
     }
@@ -51,8 +54,7 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1
-                console.log(this.game.player.health)                
+                this.game.player.health -= 1              
             }
         }
     }
@@ -61,38 +63,45 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1
-                console.log(this.game.player.health)                
+                this.game.player.health -= 1               
             }
         }
     }
 
     update(deltaTime){
-        if(this.position.x < this.game.player.position.x + 10){
-            this.position.x += this.speed
-        }
-        if(this.position.x > this.game.player.position.x + 10){
-            this.position.x -= this.speed
-        }
-        if(this.position.y < this.game.player.position.y + 10){
-            this.position.y += this.speed
-        }
-        if(this.position.y > this.game.player.position.y + 10){
-            this.position.y -= this.speed
-        }
+        if(this.health > 0){
+            if(this.position.x < this.game.player.position.x + 10){
+                this.position.x += this.speed.x
+            }
+            if(this.position.x > this.game.player.position.x + 10){
+                this.position.x -= this.speed.x
+            }
+            if(this.position.y < this.game.player.position.y + 10){
+                this.position.y += this.speed.y
+            }
+            if(this.position.y > this.game.player.position.y + 10){
+                this.position.y -= this.speed.y
+            }
 
-        this.time++
-        if(this.time >= this.delybetweenattack){
-            if(this.dely < 1){
-                this.dely++
-                this.time = 0
+            this.time++
+            if(this.time >= this.delybetweenattack){
+                if(this.dely < 1){
+                    this.dely++
+                    this.time = 0
+                }
             }
         }
-        console.log(this.health)
+
+        this.game.tile = this.game.tile.filter(object => object.health != 0)
+        if(this.health === 0){
+            this.color = "rgba(255, 0, 0, 0)"
+        }
+        console.log(this.position)
     }
 
     draw(ctx){
-        ctx.fillStyle = "red";
+        ctx.opacity = this.opacity
+        ctx.fillStyle = this.color;
         ctx.fillRect(this.position.x, 
             this.position.y, 
             this.width, 

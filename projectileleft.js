@@ -10,14 +10,20 @@ export default class ProjectileLeft {
         }
         this.damage = 1
         this.size = 10;
-        this.speed = -10
+        this.speed = {
+            x: -10,
+
+            y: -10
+        };
         this.width = 10
         this.height = 10
         this.maxspeed = {
-            x: 10,
+            x: -10,
 
-            y: 10
+            y: -10
         }
+        this.delete = false;
+        this.id = 200
     }
 
     projectiles = [];
@@ -33,17 +39,41 @@ export default class ProjectileLeft {
         this.shoot = 0
     }
 
-      colliderLeft(Collider){
-        this.position.x = Collider.position.x - this.width
+    colliderLeft(Collider){
+        if(Collider != this.game.player){
+            this.position.x = Collider.position.x - this.width
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
     colliderRight(Collider){
-        this.position.x = Collider.position.x + Collider.size
+        if(Collider != this.game.player){
+            this.position.x = Collider.position.x + Collider.size
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
     colliderUp(Collider){
-        this.position.y = Collider.position.y + Collider.size
+        if(Collider != this.game.player){
+            this.position.y = Collider.position.y + Collider.size
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
     colliderDown(Collider){
-        this.position.y = Collider.position.y - this.width
+        if(Collider != this.game.player){
+            this.position.y = Collider.position.y - this.width
+            this.delete = true
+        }
+        if(Collider.id === 300){
+            Collider.health -= 1;
+        }
     }
 
 
@@ -54,19 +84,21 @@ export default class ProjectileLeft {
                 this.game.projectiledely.dely = 0
             }
         }
+
+        this.projectiles = this.projectiles.filter(object => object.delete === false);
     }
 
     
     
     draw(ctx){
         this.projectiles.forEach((ProjectileLeft) => ProjectileLeft.draw(ctx));
-        this.position.x += this.speed
-            ctx.fillStyle = "green"
-            ctx.fillRect(
-                this.position.x, 
-                this.position.y, 
-                this.size, 
-                this.size
-            )
+        this.position.x += this.speed.x
+        ctx.fillStyle = "green"
+        ctx.fillRect(
+            this.position.x, 
+            this.position.y, 
+            this.size, 
+            this.size
+        )
     }
 }
