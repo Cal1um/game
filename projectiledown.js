@@ -3,27 +3,29 @@ export default class ProjectileDown {
 
         this.game = game
 
-        this.position = {
-            x: this.game.player.position.x + 20,
-
-            y: this.game.player.position.y + 20
-        }
         this.damage = 1
-        this.size = 10;
         this.speed = {
-            x: 10,
+            x: this.game.player.projectilespeed,
 
-            y: 10
+            y: this.game.player.projectilespeed
         };
-        this.width = 10
-        this.height = 10
-        this.maxspeed = {
-            x: 10,
 
-            y: 10
+        this.width = this.game.player.projectilewidth
+        this.height = this.game.player.projectileheight
+        this.size = this.game.player.projectilesize
+        this.maxspeed = {
+            x: this.game.player.projectilespeed,
+
+            y: this.game.player.projectilespeed
         }
         this.delete = false;
         this.id = 200
+
+        this.position = {
+            x: this.game.player.position.x + this.game.player.size - this.size * 3,
+
+            y: this.game.player.position.y + this.game.player.size - this.size * 3
+        }
     }
 
     projectiles = [];
@@ -40,39 +42,42 @@ export default class ProjectileDown {
     }
 
     colliderLeft(Collider){
-        this.position.x = Collider.position.x - this.width
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            if(this.dely >= 1){
+
+            }
+            this.delete = true
+            Collider.health -= this.game.player.damage;
         }
     }
     colliderRight(Collider){
-        this.position.x = Collider.position.x + Collider.size
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            this.delete = true
+            Collider.health -= this.game.player.damage;
         }
     }
     colliderUp(Collider){
-        this.position.y = Collider.position.y + Collider.size
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            this.delete = true
+            Collider.health -= this.game.player.damage;
         }
     }
     colliderDown(Collider){
-        this.position.y = Collider.position.y - this.width
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            this.delete = true
+            Collider.health -= this.game.player.damage;
         }
     }
 
@@ -83,6 +88,12 @@ export default class ProjectileDown {
                 this.projectiles.push(new ProjectileDown(this.game));
                 this.game.projectiledely.dely = 0
             }
+        }
+
+        this.position = {
+            x: this.game.player.position.x + this.size,
+
+            y: this.game.player.position.y + this.size
         }
 
         this.projectiles = this.projectiles.filter(object => object.delete === false);

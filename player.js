@@ -13,6 +13,14 @@ export default class Player{
         this.gameWidth = game.gameWidth;
     
         this.newlevel = 0
+        this.damage = 1
+
+        this.projectilewidth = 10
+        this.projectileheight = 10
+        this.projectilesize = 10
+
+        this.projectilespeed = 10
+
 
         this.maxspeed = {
             x: 5,
@@ -56,16 +64,24 @@ export default class Player{
     }
 
     colliderLeft(Collider){
+        if(Collider != this.game.player && Collider.id != 200){
         this.position.x = Collider.position.x - this.width
+        }
     }
     colliderRight(Collider){
+        if(Collider != this.game.player && Collider.id != 200){
         this.position.x = Collider.position.x + Collider.size
     }
+    }
     colliderUp(Collider){
+        if(Collider != this.game.player && Collider.id != 200){
         this.position.y = Collider.position.y + Collider.size
+        }
     }
     colliderDown(Collider){
+        if(Collider != this.game.player && Collider.id != 200){
         this.position.y = Collider.position.y - this.width
+        }
     }
 
 
@@ -92,24 +108,32 @@ export default class Player{
 
         if(this.position.x < 0){
             this.position.x = 0
-            this.newlevel = 1
-            this.game.newlevel()
+            if(this.game.collision.clearroom == 1){
+                this.newlevel = 1
+                this.game.newlevel()
+            }
         }
         if(this.position.x + this.width > this.gameWidth){ 
             this.position.x = this.gameWidth - this.width;
-            this.newlevel = 2
-            this.game.newlevel()
+            if(this.game.collision.clearroom == 1){
+                this.newlevel = 2
+                this.game.newlevel()
+            }
         }
 
         if(this.position.y < 0){
             this.position.y = 0;
-            this.newlevel = 3
-            this.game.newlevel()
+            if(this.game.collision.clearroom == 1){
+                this.newlevel = 3
+                this.game.newlevel()
+            }
         }
         if(this.position.y + this.height > this.gameHeight){
             this.position.y = this.gameHeight - this.height;
-            this.newlevel = 4
-            this.game.newlevel()
+            if(this.game.collision.clearroom == 1){
+                this.newlevel = 4
+                this.game.newlevel()
+            }
         }
         
     }

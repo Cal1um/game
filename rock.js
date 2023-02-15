@@ -20,6 +20,7 @@ export default class Rock {
         this.position = position;
         this.size = 90;
         this.health = 100
+        this.delete = false
     }
 
     colliderLeft(Collider){

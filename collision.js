@@ -7,51 +7,61 @@ export default class Collision {
         this.projectileright = projectileright;
         this.projectileup = projectileup;
         this.player = player;
+
+        this.count = 0
+        this.roomclear = 0
+        this.clearroom = 0
+        this.delete = false
     }
     update(deltaTime){
         
         this.object = [...this.game.tile, this.player, ...this.projectiledown.projectiles, ...this.projectileup.projectiles, ...this.projectileleft.projectiles, ...this.projectileright.projectiles]
-        this.collider = this.object
+        this.collider = [...this.game.tile, this.player, ...this.projectiledown.projectiles, ...this.projectileup.projectiles, ...this.projectileleft.projectiles, ...this.projectileright.projectiles]
 
         this.object.forEach((Object) => {
             this.collider.forEach((Collider) => {
-                //Top Right Left
-                if(Collider.position.x <= Object.position.x + Object.width - Object.maxspeed.x && Object.position.x + Object.width - Object.maxspeed.x <= Collider.position.x && Collider.position.y < Object.position.y && Object.position.y < Collider.position.y + Collider.size){
-                    Object.colliderLeft(Collider)
-                }
-                //Top Right up
-                if(Collider.position.y + Collider.size <= Object.position.y + Object.maxspeed.y && Object.position.y + Object.maxspeed.y <= Collider.position.y + Collider.size && Collider.position.x < Object.position.x + Object.maxspeed.y && Object.position.x + Object.maxspeed.y < Collider.position.x + Collider.size){
-                    Object.colliderUp(Collider)
-                }                
-                //Bottum Right Left
-                if(Collider.position.x <= Object.position.x + Object.width - Object.maxspeed.x && Object.position.x + Object.width - Object.maxspeed.x <= Collider.position.x && Collider.position.y < Object.position.y + Object.height && Object.position.y + Object.height < Collider.position.y + Collider.size){
-                    Object.colliderLeft(Collider)
-                }
-                //Bottum Right down
-                if(Collider.position.y <= Object.position.y + Object.width - Object.maxspeed.y && Object.position.y + Object.width - Object.maxspeed.y <= Collider.position.y && Collider.position.x < Object.position.x + Object.width && Object.position.x + Object.width < Collider.position.x + Collider.size){
-                    Object.colliderDown(Collider)
-                }
-                //Top Left Right 
-                if(Collider.position.x + Collider.size <= Object.position.x + Object.maxspeed.x && Object.position.x + Object.maxspeed.x <= Collider.position.x + Collider.size && Collider.position.y < Object.position.y + Object.maxspeed.x && Object.position.y + Object.maxspeed.x < Collider.position.y + Collider.size){
-                    Object.colliderRight(Collider)
-                }
-                //Top Left up
-                if(Collider.position.y + Collider.size <= Object.position.y + Object.maxspeed.y && Object.position.y + Object.maxspeed.y <= Collider.position.y + Collider.size && Collider.position.x < Object.position.x + Object.width && Object.position.x + Object.width < Collider.position.x + Collider.size){
-                    Object.colliderUp(Collider)
-                }
-                //Bottum Left Right
-                if(Collider.position.x + Collider.size <= Object.position.x + Object.maxspeed.x && Object.position.x + Object.maxspeed.x <= Collider.position.x + Collider.size && Collider.position.y < Object.position.y + Object.height - Object.maxspeed.x && Object.position.y + Object.height - Object.maxspeed.x < Collider.position.y + Collider.size){
-                    Object.colliderRight(Collider)
-                }
-                //Bottum Left down
-                if(Collider.position.y <= Object.position.y + Object.width - Object.maxspeed.y && Object.position.y + Object.width - Object.maxspeed.y <= Collider.position.y && Collider.position.x < Object.position.x && Object.position.x < Collider.position.x + Collider.size){
-                    Object.colliderDown(Collider)
+
+                if(Collider != Object){
+                    if(Object.position.y < Collider.position.y + Collider.height && Object.position.y > Collider.position.y && Object.position.x + Object.maxspeed.x > Collider.position.x && Object.position.x + Object.maxspeed.x < Collider.position.x + Collider.width || Object.position.y < Collider.position.y + Collider.height && Object.position.y > Collider.position.y && Object.position.x + Object.width - Object.maxspeed.x < Collider.position.x + Collider.width && Object.position.x + Object.width - Object.maxspeed.x > Collider.position.x){
+                        Object.colliderUp(Collider)
+                    }
+                    if(Object.position.y + Object.height > Collider.position.y && Object.position.y < Collider.position.y + Collider.height && Object.position.x + Object.maxspeed.x > Collider.position.x && Object.position.x + Object.maxspeed.x < Collider.position.x + Collider.width || Object.position.y + Object.height > Collider.position.y && Object.position.y < Collider.position.y + Collider.height && Object.position.x + Object.width - Object.maxspeed.x < Collider.position.x + Collider.width && Object.position.x + Object.width - Object.maxspeed.x > Collider.position.x){
+                        Object.colliderDown(Collider)
+                    }
+    
+                    if(Object.position.x < Collider.position.x + Collider.width && Object.position.x > Collider.position.x && Object.position.y + Object.maxspeed.y > Collider.position.y && Object.position.y + Object.maxspeed.y < Collider.position.y + Collider.height || Object.position.x < Collider.position.x + Collider.width && Object.position.x > Collider.position.x && Object.position.y + Object.height - Object.maxspeed.y < Collider.position.y + Collider.height && Object.position.y + Object.height - Object.maxspeed.y > Collider.position.y){
+                        Object.colliderRight(Collider)
+                    }
+                    if(Object.position.x + Object.width > Collider.position.x && Object.position.x < Collider.position.x + Collider.width && Object.position.y + Object.maxspeed.y > Collider.position.y && Object.position.y + Object.maxspeed.y < Collider.position.y + Collider.height || Object.position.x + Object.width > Collider.position.x && Object.position.x < Collider.position.x + Collider.width && Object.position.y + Object.height - Object.maxspeed.y < Collider.position.y + Collider.height && Object.position.y + Object.height - Object.maxspeed.y > Collider.position.y){
+                        Object.colliderLeft(Collider)
+                    }   
                 }
             }) 
         });
+        this.checkingroomclear = [...this.game.tile]
+
+        this.checkingroomclear.forEach((Object) => {
+            if(Object.id === 300 || Object.id === 400){
+                this.count += 1
+            }
+            if(Object.id === 400){
+                this.clearroom = 1
+            }
+        })
+        this.roomclear = this.count
+        this.count = 0
+        if(this.roomclear === 0 && this.game.levels.length / 2 > this.game.layer[this.game.RightLeft][this.game.UpDown]){
+            this.game.layer[this.game.RightLeft][this.game.UpDown] = this.game.layer[this.game.RightLeft][this.game.UpDown] + (this.game.levels.length / 2)
+            this.clearroom = 1
+            this.game.player.health += 1
+        }
+        if(this.roomclear === 0){
+            this.clearroom = 1
+        }
     }
     check(){
         console.log(this.game.tile)
+        console.log(this.game.layer)
     }
     draw(){}
 }

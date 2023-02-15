@@ -5,7 +5,7 @@ import ProjectileDely from "/projectiledely.js";
 import Enemy from "/enemy.js";
 
 
-import { buildLevel, level0, level1, level2, level3, level4, level5, level6 } from "/levels.js"
+import { buildLevel, level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear, levelbossclear } from "/levels.js"
 import ProjectileUp from "/projectileup.js";
 import ProjectileDown from "/projectiledown.js";
 import ProjectileLeft from "/projectileleft.js";
@@ -30,7 +30,7 @@ export default class Game{
     
     newlevel(){
         
-        
+        //map generation
         this.random = Math.floor(Math.random() * 6) + 1;
         if(this.firstloop === 0){
             
@@ -41,6 +41,11 @@ export default class Game{
     
                 }
             }
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
             this.layer[5][5] = 0
             console.log(this.layer)
         }
@@ -50,48 +55,50 @@ export default class Game{
 
         this.currentLevel = this.layer[this.RightLeft][this.UpDown]
 
-        if(this.player.newlevel === 1){ //right door
-            this.RightLeft += 1
-            this.room = this.layer[this.RightLeft][this.UpDown]
-            this.currentLevel = this.room
-
-            console.log(this.player.newlevel)
-            this.player.position.x = this.gameWidth - this.player.width
-            this.player.newlevel = 0
+        try{
+            if(this.player.newlevel === 1){ //right door
+                this.RightLeft += 1
+                this.room = this.layer[this.RightLeft][this.UpDown]
+                this.currentLevel = this.room
+    
+                this.player.position.x = this.gameWidth - this.player.width
+                this.player.newlevel = 0
+            }
+    
+            if(this.player.newlevel === 2){ //left door
+                this.RightLeft -= 1
+                this.room = this.layer[this.RightLeft][this.UpDown]
+                this.currentLevel = this.room
+    
+                this.player.position.x = 0
+                this.player.newlevel = 0
+            }
+    
+            if(this.player.newlevel === 3){ //bottum door
+                this.UpDown += 1
+                this.room = this.layer[this.RightLeft][this.UpDown]
+                this.currentLevel = this.room
+    
+                
+                this.player.position.y = this.gameHeight - this.player.height
+                this.player.newlevel = 0
+            }
+    
+            if(this.player.newlevel === 4){ //top door
+                this.UpDown -= 1
+                this.room = this.layer[this.RightLeft][this.UpDown]
+                this.currentLevel = this.room
+    
+    
+                this.player.position.y = 0
+                this.player.newlevel = 0
+            }
+        }
+        catch{
+            this.currentLevel = 7
         }
 
-        if(this.player.newlevel === 2){ //left door
-            this.RightLeft -= 1
-            this.room = this.layer[this.RightLeft][this.UpDown]
-            this.currentLevel = this.room
-
-            console.log(this.player.newlevel)
-            this.player.position.x = 0
-            this.player.newlevel = 0
-        }
-
-        if(this.player.newlevel === 3){ //bottum door
-            this.UpDown += 1
-            this.room = this.layer[this.RightLeft][this.UpDown]
-            this.currentLevel = this.room
-
-            
-            console.log(this.player.newlevel)
-            this.player.position.y = this.gameHeight - this.player.height
-            this.player.newlevel = 0
-        }
-
-        if(this.player.newlevel === 4){ //top door
-            this.UpDown -= 1
-            this.room = this.layer[this.RightLeft][this.UpDown]
-            this.currentLevel = this.room
-
-
-            this.player.position.y = 0
-            this.player.newlevel = 0
-        }
-        
-        this.levels = [level0, level1, level2, level3, level4, level5, level6]
+        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear, levelbossclear]
 
         let tile = buildLevel(this, this.levels[this.currentLevel]);
         this.tile = tile
@@ -100,6 +107,7 @@ export default class Game{
         new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
 
         this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision];
+
         
         
     }
@@ -120,11 +128,12 @@ export default class Game{
         
 
         if(this.firstloop === 0){
-            this.newlevel()            
+            this.newlevel() 
+            console.log(this.player.health)           
         }
         this.firstloop = 1      
 
-        this.levels = [level0, level1, level2, level3, level4, level5, level6]
+        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear]
 
         let tile = buildLevel(this, this.levels[this.currentLevel]);
 
@@ -133,13 +142,14 @@ export default class Game{
         this.tile = tile
         
         this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision];
-        
+
     }
 
     
 
     update(deltaTime){
         this.gameObjects.forEach((Object) => Object.update(deltaTime))
+
     }
     draw(ctx){
         this.gameObjects.forEach((Object) => Object.draw(ctx))

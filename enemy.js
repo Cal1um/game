@@ -5,7 +5,7 @@ export default class Enemy {
 
         this.game = game
 
-        this.health = 2
+        this.health = 6
 
         this.id = 300
         this.damage = 1
@@ -32,38 +32,52 @@ export default class Enemy {
     }
 
     colliderLeft(Collider){
-        this.position.x = Collider.position.x - this.width
+        if(Collider.id != 200){
+            this.position.x = Collider.position.x - this.width                
+        }
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1              
+                this.game.player.health -= 1      
+                console.log(this.game.player.health)        
             }
         }
     }
     colliderRight(Collider){
-        this.position.x = Collider.position.x + Collider.size
+        if(Collider.id != 200){
+            this.position.x = Collider.position.x + Collider.size         
+        }
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1                
+                this.game.player.health -= 1  
+                console.log(this.game.player.health)                      
             }
-        }
+        } 
+
     }
     colliderUp(Collider){
-        this.position.y = Collider.position.y + Collider.size
+        if(Collider.id != 200){
+            this.position.y = Collider.position.y + Collider.size         
+        }
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1              
+                this.game.player.health -= 1     
+                console.log(this.game.player.health)                 
             }
-        }
+        } 
+        
     }
     colliderDown(Collider){
-        this.position.y = Collider.position.y - this.width
+        if(Collider.id != 200){
+            this.position.y = Collider.position.y - this.width      
+        }
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1               
+                this.game.player.health -= 1   
+                console.log(this.game.player.health)                    
             }
         }
     }
@@ -92,11 +106,10 @@ export default class Enemy {
             }
         }
 
-        this.game.tile = this.game.tile.filter(object => object.health != 0)
-        if(this.health === 0){
+        this.game.tile = this.game.tile.filter(object => object.health > 0)
+        if(this.health <= 0){
             this.color = "rgba(255, 0, 0, 0)"
         }
-        console.log(this.position)
     }
 
     draw(ctx){

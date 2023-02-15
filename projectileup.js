@@ -9,19 +9,19 @@ export default class ProjectileUp {
             y: this.game.player.position.y + 20
         }
         this.damage = 1
-        this.size = 10;
+        this.width = this.game.player.projectilewidth
+        this.height = this.game.player.projectileheight
+        this.size = this.game.player.projectilesize
         this.speed = {
-            x: -10,
+            x: -this.game.player.projectilespeed,
 
-            y: -10
+            y: -this.game.player.projectilespeed
         };
         this.maxspeed = {
-            x: 10,
+            x: this.game.player.projectilespeed,
 
-            y: 10
+            y: this.game.player.projectilespeed
         }
-        this.width = 10
-        this.height = 10
         this.delete = false;
         this.id = 200
     }
@@ -40,41 +40,42 @@ export default class ProjectileUp {
     }
 
     colliderLeft(Collider){
-        this.position.x = Collider.position.x - this.width
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            Collider.health -= this.game.player.damage;
+            this.delete = true
         }
     }
     colliderRight(Collider){
-        this.position.x = Collider.position.x + Collider.size
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            Collider.health -= this.game.player.damage;
+            this.delete = true
         }
     }
     colliderUp(Collider){
-        this.position.y = Collider.position.y + Collider.size
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            Collider.health -= this.game.player.damage;
+            this.delete = true
         }
     }
     colliderDown(Collider){
-        this.position.y = Collider.position.y - this.width
         if(Collider != this.game.player){
             this.delete = true
         }
         if(Collider.id === 300){
-            Collider.health -= 1;
+            Collider.health -= this.game.player.damage;
+            this.delete = true
         }
     }
+
 
 
     update(deltaTime){
