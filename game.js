@@ -1,6 +1,6 @@
 import Player from "./player.js";
 import InputHandler from "./input.js";
-import Rock from "./Rock.js"
+import Rock from "./rock.js"
 import ProjectileDely from "./projectiledely.js";
 import Enemy from "./enemy.js";
 import EnemyScaling from "./enemyscaling.js";
