@@ -6,7 +6,7 @@ import Enemy from "./enemy.js";
 import EnemyScaling from "./enemyscaling.js";
 
 
-import { buildLevel, level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear, levelbossclear } from "./levels.js"
+import { buildLevel, level0, level1, level2, level3, level4, level5, level6, level7, levelboss, levelitem, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, level7clear, levelitemclear, levelbossclear } from "./levels.js"
 import ProjectileUp from "./projectileup.js";
 import ProjectileDown from "./projectiledown.js";
 import ProjectileLeft from "./projectileleft.js";
@@ -42,7 +42,7 @@ export default class Game{
             for (var i = 0; i < 11; i++){
                 this.layer[i] = [];
                 for (var j = 0; j < 11; j++){
-                    this.layer[i][j] = Math.floor(Math.random() * 6) + 1;
+                    this.layer[i][j] = Math.floor(Math.random() * 7) + 1;
     
                 }
             }
@@ -131,7 +131,7 @@ export default class Game{
         }
 
 
-        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelbossclear, levelitemclear]
+        this.levels = [level0, level1, level2, level3, level4, level5, level6, level7, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, level7clear, levelbossclear, levelitemclear]
 
         let tile = buildLevel(this, this.levels[this.currentLevel]);
         this.tile = tile
@@ -164,7 +164,7 @@ export default class Game{
             }
             this.firstloop = 1
 
-        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelbossclear, levelitemclear]
+        this.levels = [level0, level1, level2, level3, level4, level5, level6, level7, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, level7clear, levelbossclear, levelitemclear]
     
         let tile = buildLevel(this, this.levels[this.currentLevel]);
 
