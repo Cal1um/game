@@ -5,9 +5,9 @@ import Boss from "/boss.js";
 
 export function buildLevel(game, level) {
     let tiles = [];
-
     level.forEach((row, rowIndex) => {
         row.forEach((tile, tileIndex) => {
+            //walls named rock
             if(tile === 1) {
 
                 let position = {
@@ -16,6 +16,7 @@ export function buildLevel(game, level) {
                 }
                 tiles.push(new Rock(game, position));
             }
+            //enemy
             if(tile === 2){
 
                 let position = {
@@ -24,6 +25,7 @@ export function buildLevel(game, level) {
                 }
                 tiles.push(new Enemy(game, position));
             }
+            //upgrades
             if(tile === 3){
 
                 let position = {
@@ -32,6 +34,7 @@ export function buildLevel(game, level) {
                 }
                 tiles.push(new Upgrade(game, position));
             }
+            //boss
             if(tile === 4){
 
                 let position = {
@@ -63,7 +66,7 @@ export const level0 = [
     [1,0,0,0,0,0,1,0,0,0,0,0,1],
     [0,0,0,0,1,0,0,0,1,0,0,0,0],
     [1,0,0,0,0,0,1,0,0,0,0,0,1],
-    [1,0,3,0,0,0,0,0,0,0,0,0,1],
+    [1,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,0,1,1,1,1,1,1]
 ];
 
@@ -172,7 +175,7 @@ export const level6 = [
     [1,1,1,1,1,1,0,1,1,1,1,1,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,0,1,1,1,1,1,1,1,1,1,0,1],
-    [0,0,0,0,2,2,0,2,2,0,0,0,0],
+    [0,0,0,0,2,2,1,2,2,0,0,0,0],
     [1,0,1,1,1,1,1,1,1,1,1,0,1],
     [1,0,0,0,0,0,0,0,0,0,0,0,1],
     [1,1,1,1,1,1,0,1,1,1,1,1,1]

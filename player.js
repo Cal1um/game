@@ -1,6 +1,3 @@
-
-
-
 export default class Player{
     constructor(game, buildLevel){
         this.width = 50;
@@ -84,7 +81,13 @@ export default class Player{
         }
     }
 
-
+    closemenu(){
+        if(this.game.menu == 1){
+            this.game.menu = 0 
+            this.game.firstloop = 0
+            this.game.start();
+        }
+    }
 
 
     draw(ctx){
@@ -99,6 +102,7 @@ export default class Player{
             this.game.RightLeft = 5
             this.game.UpDown = 5
             this.game.firstloop = 0
+            this.game.menu = 1
             this.game.start()
         }
         

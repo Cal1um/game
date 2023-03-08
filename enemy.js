@@ -5,29 +5,29 @@ export default class Enemy {
 
         this.game = game
 
-        this.health = 6
+        this.health = this.game.enemyscaling.enemyhealth
 
         this.id = 300
-        this.damage = 1
+        this.damage = this.game.enemyscaling.enemydamage
 
         this.position = position
         this.width = 30;
         this.height = 30;
         this.size = 30;
         this.speed = {
-            x: 2.5,
+            x: this.game.enemyscaling.enemyspeed.x,
 
-            y: 2.5
+            y: this.game.enemyscaling.enemyspeed.y
         };
         this.maxspeed = {
-            x: 2.5,
+            x: this.game.enemyscaling.enemymaxspeed.x,
 
-            y: 2.5
+            y: this.game.enemyscaling.enemymaxspeed.y
         };
         this.dely = 0
 
         this.time = 0
-        this.delybetweenattack = 15
+        this.delybetweenattack = 20
         this.color = "rgba(255, 0, 0, 1)"
     }
 
@@ -38,8 +38,7 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1      
-                console.log(this.game.player.health)        
+                this.game.player.health -= this.damage        
             }
         }
     }
@@ -50,8 +49,7 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1  
-                console.log(this.game.player.health)                      
+                this.game.player.health -= this.damage                      
             }
         } 
 
@@ -63,8 +61,7 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1     
-                console.log(this.game.player.health)                 
+                this.game.player.health -= this.damage               
             }
         } 
         
@@ -76,8 +73,7 @@ export default class Enemy {
         if(Collider == this.game.player){
             if(this.dely >= 1){
                 this.dely = 0
-                this.game.player.health -= 1   
-                console.log(this.game.player.health)                    
+                this.game.player.health -= this.damage              
             }
         }
     }

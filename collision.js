@@ -53,15 +53,11 @@ export default class Collision {
         if(this.roomclear === 0 && this.game.levels.length / 2 > this.game.layer[this.game.RightLeft][this.game.UpDown]){
             this.game.layer[this.game.RightLeft][this.game.UpDown] = this.game.layer[this.game.RightLeft][this.game.UpDown] + (this.game.levels.length / 2)
             this.clearroom = 1
-            this.game.player.health += 1
+            this.game.player.health += this.game.enemyscaling.heal
         }
         if(this.roomclear === 0){
             this.clearroom = 1
         }
-    }
-    check(){
-        console.log(this.game.tile)
-        console.log(this.game.layer)
     }
     draw(){}
 }

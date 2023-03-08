@@ -33,10 +33,12 @@ export default class InputHandler {
                 case 83:
                     player.movedown();
                     break;
-                
-                case 77:
-                    collision.check();
+
+                case 32:
+                    player.closemenu();
                     break;
+
+                    
                 
                 
             }

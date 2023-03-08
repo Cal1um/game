@@ -28,20 +28,28 @@ export default class Upgrade {
     }
 
     colliderLeft(Collider){
-        this.collided = 1
-        this.health = 0
+        if(Collider.id != 200){
+            this.collided = 1
+            this.health = 0  
+        }
     }
     colliderRight(Collider){
-        this.collided = 1
-        this.health = 0
+        if(Collider.id != 200){
+            this.collided = 1
+            this.health = 0  
+        }
     }
     colliderUp(Collider){
-        this.collided = 1
-        this.health = 0
+        if(Collider.id != 200){
+            this.collided = 1
+            this.health = 0  
+        }
     }
     colliderDown(Collider){
-        this.collided = 1
-        this.health = 0
+        if(Collider.id != 200){
+            this.collided = 1
+            this.health = 0  
+        }
     }
 
 

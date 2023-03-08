@@ -3,6 +3,7 @@ import InputHandler from "/input.js";
 import Rock from "/Rock.js"
 import ProjectileDely from "/projectiledely.js";
 import Enemy from "/enemy.js";
+import EnemyScaling from "/enemyscaling.js";
 
 
 import { buildLevel, level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear, levelbossclear } from "/levels.js"
@@ -19,12 +20,16 @@ export default class Game{
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;    
         
-        this.firstloop = 0
+        this.firstloop = 0;
 
-        this.RightLeft = 5
-        this.UpDown = 5
+        this.RightLeft = 5;
+        this.UpDown = 5;
         
-        this.layer = []
+        this.layer = [];
+
+        this.removeprojctile = false;
+
+        this.menu = 1;
         
     }
     
@@ -46,8 +51,22 @@ export default class Game{
             this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
             this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
             this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
+            this.layer[Math.floor(Math.random() * 11)][Math.floor(Math.random() * 11)] = 8
             this.layer[5][5] = 0
-            console.log(this.layer)
         }
         
         
@@ -74,7 +93,7 @@ export default class Game{
                 this.player.newlevel = 0
             }
     
-            if(this.player.newlevel === 3){ //bottum door
+            if(this.player.newlevel === 3){ //top door
                 this.UpDown += 1
                 this.room = this.layer[this.RightLeft][this.UpDown]
                 this.currentLevel = this.room
@@ -84,7 +103,7 @@ export default class Game{
                 this.player.newlevel = 0
             }
     
-            if(this.player.newlevel === 4){ //top door
+            if(this.player.newlevel === 4){ //bottom door
                 this.UpDown -= 1
                 this.room = this.layer[this.RightLeft][this.UpDown]
                 this.currentLevel = this.room
@@ -93,12 +112,26 @@ export default class Game{
                 this.player.position.y = 0
                 this.player.newlevel = 0
             }
+            if(this.RightLeft > 10 || this.RightLeft < 0 || this.UpDown > 10 || this.UpDown < 0){
+                this.RightLeft = 5;
+                this.UpDown = 5;
+                this.layer[5][5] = 7;
+                this.player.position.x = this.gameWidth / 2;
+                this.player.position.y = this.gameHeight - 120;
+                this.currentLevel = this.layer[this.RightLeft][this.UpDown];
+            }
         }
         catch{
-            this.currentLevel = 7
+            this.RightLeft = 5;
+            this.UpDown = 5;
+            this.layer[5][5] = 7;
+            this.player.position.x = this.gameWidth / 2;
+            this.player.position.y = this.gameHeight - 120;
+            this.currentLevel = this.layer[this.RightLeft][this.UpDown];
         }
 
-        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear, levelbossclear]
+
+        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelbossclear, levelitemclear]
 
         let tile = buildLevel(this, this.levels[this.currentLevel]);
         this.tile = tile
@@ -106,13 +139,15 @@ export default class Game{
 
         new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright);
 
-        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision];
+        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision, this.enemyscaling];
 
         
         
     }
+    
 
     start(){
+        this.enemyscaling = new EnemyScaling(this);
         this.player = new Player(this, this.currentLevel);
         this.enemy = new Enemy(this);
 
@@ -123,35 +158,53 @@ export default class Game{
         this.rock = new Rock(this);
 
         this.projectiledely = new ProjectileDely(this);
+            if(this.firstloop === 0){
+                this.newlevel() 
+                console.log(this.player.health)           
+            }
+            this.firstloop = 1
 
-        
-        
-
-        if(this.firstloop === 0){
-            this.newlevel() 
-            console.log(this.player.health)           
-        }
-        this.firstloop = 1      
-
-        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear]
-
+        this.levels = [level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level0, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelbossclear, levelitemclear]
+    
         let tile = buildLevel(this, this.levels[this.currentLevel]);
 
         new InputHandler(this.player, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.collision);
         
         this.tile = tile
         
-        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision];
+        this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision, this.enemyscaling];
 
+       
     }
 
     
 
     update(deltaTime){
         this.gameObjects.forEach((Object) => Object.update(deltaTime))
-
     }
     draw(ctx){
         this.gameObjects.forEach((Object) => Object.draw(ctx))
+        ctx.fillStyle = "lime"
+        ctx.fillText("Health " + Math.round(this.player.health), this.gameWidth / 2 - 540, this.gameHeight - 60)
+        ctx.fillStyle = "crimson"
+        ctx.fillText("Damage " + this.player.damage, this.gameWidth / 2 - 360, this.gameHeight - 60)
+        ctx.fillStyle = "lightblue"
+        ctx.fillText("Speed " + this.player.maxspeed.x, this.gameWidth / 2 - 180, this.gameHeight - 60)
+        ctx.fillStyle = "yellow"
+        ctx.fillText("FireRate " + this.projectiledely.delybetweenshot, this.gameWidth / 2 - 470, this.gameHeight - 20)
+        ctx.fillStyle = "blue"
+        ctx.fillText("ShotSpeed " + this.player.projectilespeed, this.gameWidth / 2 - 290, this.gameHeight - 20)
+        ctx.fillStyle = "black"
+        ctx.fillText("Floors cleared " + this.enemyscaling.floorscleared, this.gameWidth - 540, this.gameHeight - 35)
+        ctx.fillStyle = "black"
+        ctx.fillText("Current Room " + "[" + this.RightLeft + "]" + " " + "[" + this.UpDown + "]", this.gameWidth - 300, this.gameHeight - 35)
+
+        if(this.menu == 1){
+            ctx.fillStyle = "burlywood";
+            ctx.fillRect(0, 0, this.gameWidth, this.gameHeight)
+            ctx.fillStyle = "black";
+            ctx.font = "30px Arial"
+            ctx.fillText("Press space bar to begin", this.gameWidth / 2 - 500, this.gameHeight / 2)
+        }
     };
 }
