@@ -1,18 +1,18 @@
-import Player from "/player.js";
-import InputHandler from "/input.js";
-import Rock from "/Rock.js"
-import ProjectileDely from "/projectiledely.js";
-import Enemy from "/enemy.js";
-import EnemyScaling from "/enemyscaling.js";
+import Player from "./player.js";
+import InputHandler from "./input.js";
+import Rock from "./Rock.js"
+import ProjectileDely from "./projectiledely.js";
+import Enemy from "./enemy.js";
+import EnemyScaling from "./enemyscaling.js";
 
 
-import { buildLevel, level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear, levelbossclear } from "/levels.js"
-import ProjectileUp from "/projectileup.js";
-import ProjectileDown from "/projectiledown.js";
-import ProjectileLeft from "/projectileleft.js";
-import ProjectileRight from "/projectileright.js";
+import { buildLevel, level0, level1, level2, level3, level4, level5, level6, levelboss, levelitem, level1clear, level2clear, level3clear, level4clear, level5clear, level6clear, levelitemclear, levelbossclear } from "./levels.js"
+import ProjectileUp from "./projectileup.js";
+import ProjectileDown from "./projectiledown.js";
+import ProjectileLeft from "./projectileleft.js";
+import ProjectileRight from "./projectileright.js";
 
-import Collision from "/collision.js";
+import Collision from "./collision.js";
 
 
 export default class Game{

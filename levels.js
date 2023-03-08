@@ -1,7 +1,7 @@
-import Rock from "/rock.js";
-import Enemy from "/enemy.js";
-import Upgrade from "/upgrades.js";
-import Boss from "/boss.js";
+import Rock from "./rock.js";
+import Enemy from "./enemy.js";
+import Upgrade from "./upgrades.js";
+import Boss from "./boss.js";
 
 export function buildLevel(game, level) {
     let tiles = [];
