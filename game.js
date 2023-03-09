@@ -115,7 +115,7 @@ export default class Game{
             if(this.RightLeft > 10 || this.RightLeft < 0 || this.UpDown > 10 || this.UpDown < 0){
                 this.RightLeft = 5;
                 this.UpDown = 5;
-                this.layer[5][5] = 7;
+                this.layer[5][5] = 8;
                 this.player.position.x = this.gameWidth / 2;
                 this.player.position.y = this.gameHeight - 120;
                 this.currentLevel = this.layer[this.RightLeft][this.UpDown];
@@ -124,7 +124,7 @@ export default class Game{
         catch{
             this.RightLeft = 5;
             this.UpDown = 5;
-            this.layer[5][5] = 7;
+            this.layer[5][5] = 8;
             this.player.position.x = this.gameWidth / 2;
             this.player.position.y = this.gameHeight - 120;
             this.currentLevel = this.layer[this.RightLeft][this.UpDown];
