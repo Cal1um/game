@@ -176,7 +176,10 @@ export default class Game{
         
         this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision, this.enemyscaling];
             
-        localStorage.floor = this.deathfloor
+        localStorage.floor = Number(localStorage.floor)
+        if(this.deathfloor > localStorage.floor){
+            localStorage.floor = this.deathfloor
+        }
        
     }
 
@@ -212,7 +215,7 @@ export default class Game{
             ctx.fillStyle = "black";
             ctx.font = "30px Arial"
             ctx.fillText("Press space bar to begin", this.gameWidth / 2 - 500, this.gameHeight / 2)
-            ctx.fillText("You made it to floor " + localStorage.floor, this.gameWidth / 2 - 500, this.gameHeight / 2 + 100)
+            ctx.fillText("Your highest floor reached: " + localStorage.floor, this.gameWidth / 2 - 500, this.gameHeight / 2 + 100)
         }
         if(this.menu == 2){
             ctx.fillStyle = "rgba(0, 0, 0, 0.8)";
