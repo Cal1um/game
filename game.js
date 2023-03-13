@@ -176,12 +176,11 @@ export default class Game{
         
         this.gameObjects = [...tile, this.projectileup, this.projectiledown, this.projectileleft, this.projectileright, this.player, this.projectiledely, this.collision, this.enemyscaling];
             
-        localStorage.floor = Number(localStorage.floor)
+        if(!localStorage.floor){
+            this.localStorage.floor = 0
+        }
         if(this.deathfloor > localStorage.floor){
             localStorage.floor = this.deathfloor
-        }
-        if(localStorage.floor == localStorage.nothing){
-            this.localStorage.floor = 0
         }
        
     }
