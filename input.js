@@ -37,7 +37,9 @@ export default class InputHandler {
                 case 32:
                     player.closemenu();
                     break;
-
+                case 27:
+                    player.pause();
+                    break;
                     
                 
                 

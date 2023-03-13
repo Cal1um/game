@@ -87,6 +87,16 @@ export default class Player{
             this.game.firstloop = 0
             this.game.start();
         }
+        if(this.game.menu == 2){
+            this.game.menu = 0
+            this.game.paused = 0
+        }
+    }
+    pause(){
+        if(this.game.menu != 1){
+            this.game.paused = 1
+            this.game.menu = 2
+        }
     }
 
 
