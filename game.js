@@ -180,7 +180,7 @@ export default class Game{
         if(this.deathfloor > localStorage.floor){
             localStorage.floor = this.deathfloor
         }
-        if(localStorage.floor == null){
+        if(localStorage.floor <! 0 ){
             this.localStorage.floor = 0
         }
        
