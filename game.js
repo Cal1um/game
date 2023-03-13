@@ -31,6 +31,7 @@ export default class Game{
 
         this.menu = 1;
         
+        this.deathfloor = 0;
     }
     
     newlevel(){
@@ -181,6 +182,7 @@ export default class Game{
 
     update(deltaTime){
         this.gameObjects.forEach((Object) => Object.update(deltaTime))
+
     }
     draw(ctx){
         this.gameObjects.forEach((Object) => Object.draw(ctx))
@@ -205,6 +207,9 @@ export default class Game{
             ctx.fillStyle = "black";
             ctx.font = "30px Arial"
             ctx.fillText("Press space bar to begin", this.gameWidth / 2 - 500, this.gameHeight / 2)
+            if(this.deathfloor > 0){
+                ctx.fillText("You made it to floor " + this.deathfloor, this.gameWidth / 2 - 500, this.gameHeight / 2 + 100)
+            }
         }
     };
 }

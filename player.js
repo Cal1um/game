@@ -103,6 +103,8 @@ export default class Player{
             this.game.UpDown = 5
             this.game.firstloop = 0
             this.game.menu = 1
+            this.game.deathfloor = this.game.enemyscaling.floorscleared   
+            
             this.game.start()
         }
         
