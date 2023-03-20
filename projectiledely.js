@@ -1,10 +1,11 @@
 export default class ProjectileDely {
-    constructor(){
+    constructor(game){
         this.dely = 0
 
         this.time = 0
         this.delybetweenshot = 36
 
+        this.game = game
     }
     update(){
         this.time++
