@@ -18,6 +18,22 @@ export default class ProjectileDely {
                 this.time = 0
             }
         }
+        
+        this.objects = [...this.game.projectileleft.projectiles, ...this.game.projectileright.projectiles, ...this.game.projectileup.projectiles, ...this.game.projectiledown.projectiles]
+        this.objects.forEach(projectile => {
+            if(projectile.position.x < 0){
+                projectile.delete = true
+            }
+            if(projectile.position.x + projectile.width > projectile.gameWidth){ 
+                projectile.delete = true
+            }
+            if(projectile.position.y < 0){
+                projectile.delete = true
+            }
+            if(projectile.position.y + projectile.height > projectile.gameHeight){
+                projectile.delete = true
+            }
+        })
     }
 
     draw(){
