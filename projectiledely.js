@@ -26,13 +26,13 @@ export default class ProjectileDely {
             if(projectile.position.x < 0){
                 projectile.delete = true
             }
-            if(projectile.position.x + projectile.width > projectile.gameWidth){ 
+            if(projectile.position.x + projectile.size > this.game.player.gameWidth){ 
                 projectile.delete = true
             }
             if(projectile.position.y < 0){
                 projectile.delete = true
             }
-            if(projectile.position.y + projectile.height > projectile.gameHeight){
+            if(projectile.position.y + projectile.size > this.game.player.gameHeight){
                 projectile.delete = true
             }
         })
