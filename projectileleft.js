@@ -79,6 +79,7 @@ export default class ProjectileLeft {
 
 
     update(deltaTime){
+
         if(this.shoot === 1){
             if(this.game.projectiledely.dely >= 1){
                 this.projectiles.push(new ProjectileLeft(this.game));

@@ -117,6 +117,11 @@ export default class Player{
             
             this.game.start()
         }
+
+        console.log(this.game.projectileup.projectiles)
+        console.log(this.game.projectiledown.projectiles)
+        console.log(this.game.projectileleft.projectiles)
+        console.log(this.game.projectileright.projectiles)
         
         
         this.position.x += this.speed.x;
