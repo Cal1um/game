@@ -6,6 +6,7 @@ export default class ProjectileDely {
         this.delybetweenshot = 36
 
         this.game = game
+
     }
     update(){
         this.time++
@@ -19,7 +20,7 @@ export default class ProjectileDely {
                 this.time = 0
             }
         }
-        
+
         this.objects = [...this.game.projectileleft.projectiles, ...this.game.projectileright.projectiles, ...this.game.projectileup.projectiles, ...this.game.projectiledown.projectiles]
         this.objects.forEach(projectile => {
             if(projectile.position.x < 0){
