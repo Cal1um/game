@@ -42,6 +42,7 @@ export default class ProjectileDown {
     }
 
     colliderLeft(Collider){
+        if(Collider.id != 200){
         if(Collider != this.game.player){
             this.delete = true
         }
@@ -53,31 +54,47 @@ export default class ProjectileDown {
             Collider.health -= this.game.player.damage;
         }
     }
+    }
     colliderRight(Collider){
-        if(Collider != this.game.player){
-            this.delete = true
-        }
-        if(Collider.id === 300){
-            this.delete = true
-            Collider.health -= this.game.player.damage;
+        if(Collider.id != 200){
+            if(Collider != this.game.player){
+                this.delete = true
+            }
+            if(Collider.id === 300){
+                if(this.dely >= 1){
+    
+                }
+                this.delete = true
+                Collider.health -= this.game.player.damage;
+            }
         }
     }
     colliderUp(Collider){
-        if(Collider != this.game.player){
-            this.delete = true
-        }
-        if(Collider.id === 300){
-            this.delete = true
-            Collider.health -= this.game.player.damage;
+        if(Collider.id != 200){
+            if(Collider != this.game.player){
+                this.delete = true
+            }
+            if(Collider.id === 300){
+                if(this.dely >= 1){
+    
+                }
+                this.delete = true
+                Collider.health -= this.game.player.damage;
+            }
         }
     }
     colliderDown(Collider){
-        if(Collider != this.game.player){
-            this.delete = true
-        }
-        if(Collider.id === 300){
-            this.delete = true
-            Collider.health -= this.game.player.damage;
+        if(Collider.id != 200){
+            if(Collider != this.game.player){
+                this.delete = true
+            }
+            if(Collider.id === 300){
+                if(this.dely >= 1){
+    
+                }
+                this.delete = true
+                Collider.health -= this.game.player.damage;
+            }
         }
     }
 
