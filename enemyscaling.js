@@ -38,7 +38,7 @@ export default class EnemyScaling {
     scale(){
         this.enemydamage *= 1.4
         this.enemyhealth *= 1.4
-        if(this.enemyhealth != 4){
+        if(this.enemyhealth != 3.5){
             this.enemyspeed.x += 0.2
             this.enemyspeed.y += 0.2
             this.enemymaxspeed.x += 0.2
@@ -47,7 +47,7 @@ export default class EnemyScaling {
 
         this.bossdamage *= 1.4
         this.bosshealth *= 1.4
-        if(this.enemyhealth != 4){
+        if(this.enemyhealth != 3.5){
             this.bossspeed.x += 0.2
             this.bossspeed.y += 0.2
             this.bossmaxspeed.x += 0.2
