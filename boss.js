@@ -90,7 +90,6 @@ export default class Boss {
             this.game.enemyscaling.scale();
             this.game.newlevel();
         }
-        console.log(this.health)
 
         if(this.health > 0){
             if(this.position.x < this.game.player.position.x - 20){
